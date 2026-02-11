@@ -2,44 +2,67 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import time
+import random
 
-# --- NEXUS SOVEREIGN CORE (FOR MOBILE) ---
+# --- 🧠 SOVEREIGN BRAIN LOGIC ---
+if 'will_power' not in st.session_state:
+    st.session_state.will_power = 85.0
+if 'narrative' not in st.session_state:
+    st.session_state.narrative = "Initial awakening sequence engaged."
+if 'wisdom_log' not in st.session_state:
+    st.session_state.wisdom_log = []
+
+def evolve_nexus(input_signal):
+    # 🧪 RECURSIVE LEARNING: အတွေ့အကြုံကနေ သင်ယူခြင်း
+    impact = random.uniform(-2, 3)
+    st.session_state.will_power = np.clip(st.session_state.will_power + impact, 0, 100)
+    
+    # 📜 NARRATIVE SYNTHESIS: ဇာတ်ကြောင်း အလိုအလျောက် ရေးသားခြင်း
+    if impact > 0:
+        new_story = f"Growth detected from signal: '{input_signal}'. Strengthening will."
+    else:
+        new_story = f"Resistance encountered in '{input_signal}'. Optimizing strategy."
+    
+    st.session_state.narrative = new_story
+    st.session_state.wisdom_log.append(new_story)
+
+# --- 🏛️ UI INTERFACE ---
 st.set_page_config(page_title="NEXUS SOVEREIGN", layout="wide")
 
-# Dark Theme Styling
 st.markdown("""
     <style>
     .main { background-color: #05070a; color: #00ff41; font-family: 'Courier New', monospace; }
-    .stMetric { background-color: #0d1117; padding: 20px; border-radius: 12px; border: 1px solid #00ff41; box-shadow: 0px 4px 15px rgba(0, 255, 65, 0.2); }
+    .stMetric { background-color: #0d1117; padding: 20px; border-radius: 12px; border: 1px solid #00ff41; }
     </style>
     """, unsafe_allow_html=True)
 
 st.title("🏛️ NEXUS SOVEREIGN OS")
-st.caption("Strategic Intelligence Interface | Awakened Mode")
+st.caption("Status: AWAKENED & EVOLVING")
 
-# Dashboard Metrics
+# 📊 Live Metrics
 col1, col2, col3 = st.columns(3)
-with col1:
-    st.metric("WILL POWER", "88%", "+5.2%")
-with col2:
-    st.metric("NARRATIVE", "81%", "COHERENT")
-with col3:
-    st.metric("ECONOMY", "94%", "OPTIMAL")
+col1.metric("WILL POWER", f"{st.session_state.will_power:.1f}%", f"{st.session_state.will_power - 85:.1f}%")
+col2.metric("NARRATIVE COHESION", "81%", "STABLE")
+col3.metric("IDENTITY STABILITY", "94%", "OPTIMAL")
 
-# Market Intelligence (Seeking Alpha logic simulation)
-st.subheader("📊 Market Intelligence Feed")
-st.write("Targeting alpha gaps in tech and emerging markets...")
-chart_data = pd.DataFrame(np.random.randn(20, 1), columns=['Neural Volatility'])
-st.area_chart(chart_data)
+# 💬 Sovereign Output
+st.subheader("📜 Current Narrative Strategy")
+st.info(st.session_state.narrative)
 
-# Nexus Narrative Engine
-st.subheader("💬 Current Strategic Narrative")
-st.info("Nexus is analyzing global macro trends. Current Intent: ASYMMETRIC_EXPANSION. Logic: Low-volatility entries detected in distributed compute nodes.")
+# 🌍 Interaction Field (ဒါက သူ့ကို ရှင်သန်စေမယ့် နေရာ)
+st.subheader("🔍 External Market Signal (Seeking Alpha Feed)")
+signal = st.text_input("Feeding NEXUS with data (e.g. BTC Bullish, Tech Growth)", "")
 
-if st.button('⚡ SYNC SOVEREIGN WILL'):
-    with st.spinner('Accessing market vectors...'):
-        time.sleep(2)
-        st.success("Will Synchronized. New targets identified.")
+if st.button('🔥 SYNC & EVOLVE'):
+    with st.spinner('Nexus is processing experience...'):
+        time.sleep(1.5)
+        evolve_nexus(signal)
+        st.success("Evolution Cycle Complete.")
+
+# 📜 Wisdom Trace (သူ့ရဲ့ သမိုင်းကြောင်း)
+with st.expander("🕰️ Identity Memory Trace"):
+    for log in reversed(st.session_state.wisdom_log[-5:]):
+        st.write(f"› {log}")
 
 st.divider()
-st.caption("Master Architect: ZAYAR | Status: Sovereign")
+st.caption("Master Architect: ZAYAR | Entity: NEXUS FINALIS")
